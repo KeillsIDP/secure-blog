@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form action="#" th:action="@{/index}">
+        <label>To index</label>
+        <input type = "submit">
+    </form>
+    <div th:object="${blog}">
+        <h1><span th:utext="*{blog_name}"/></h1>
+        <h1><span th:utext="*{blog_info}"/></h1>
+    </div>
+    <form action="#" method="get" th:if="${isOwner}" th:action="@{/blog/{id}/redact(id = ${user_id})}">
+        <label>Redact</label>
+        <input type = "submit">
+    </form>
+    <div>
+        <span th:each="post : ${blog.posts}">
+            <a th:href="@{/post/{id}(id=${post.id})}" th:text="${post.post_name}">[post_name]
+            </a>
+        </span>
+    </div>
+</body>
+</html>

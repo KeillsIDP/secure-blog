@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form method="post" action="#" role="form" th:object="${blog}" th:action="@{/blog/{id}/redact(id = ${user_id})}">
+        <label>Blog Name</label>
+        <input required id="blog_name" name="blog_name" type="text" th:field="*{blog_name}" maxlength=20>
+
+        <label>Blog Info</label>
+        <input required id="blog_info" name="blog_info" type="text" th:field="*{blog_info}" maxlength=1000>
+
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form action="#" th:action="@{/login}" th:unless="${#authorization.expression('isAuthenticated()')}">
+        <label>Login</label>
+        <input type = "submit">
+    </form>
+    <form action="#" th:action="@{/registration}" th:unless="${#authorization.expression('isAuthenticated()')}">
+        <label>Registration</label>
+        <input type = "submit">
+    </form>
+    <form action="#" th:action="@{/logout}" th:unless="${#authorization.expression('!isAuthenticated()')}">
+        <label>Logout</label>
+        <input type = "submit">
+    </form>
+    <form method="get" th:unless="${#authorization.expression('!isAuthenticated()')}" th:action="@{/toBlog}">
+        <label>Blog</label>
+        <input type = "submit">
+    </form>
+</body>
+</html>
