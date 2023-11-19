@@ -10,16 +10,16 @@
         <input type = "submit">
     </form>
     <div th:object="${blog}">
-        <h1><span th:utext="*{blog_name}"/></h1>
-        <h1><span th:utext="*{blog_info}"/></h1>
+        <h1><span th:utext="*{blogName}"/></h1>
+        <h1><span th:utext="*{blogInfo}"/></h1>
     </div>
-    <form action="#" method="get" th:if="${isOwner}" th:action="@{/blog/{id}/redact(id = ${user_id})}">
+    <form action="#" method="get" th:if="${isOwner}" th:action="@{/blog/{id}/redact(id = ${blog.id})}">
         <label>Redact</label>
         <input type = "submit">
     </form>
     <div>
         <span th:each="post : ${blog.posts}">
-            <a th:href="@{/post/{id}(id=${post.id})}" th:text="${post.post_name}">[post_name]
+            <a th:href="@{/post/{id}(id=${post.id})}" th:text="${post.postName}">[postName]
             </a>
         </span>
     </div>

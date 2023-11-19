@@ -27,17 +27,17 @@ public class Post {
     @JoinColumn(name="blog_table.id")
     private Blog blog;
 
-    private String post_name;
+    private String postName;
 
     private String text;
 
     @CreatedDate
     @DateTimeFormat(pattern = "dd/mm/yyyy")
-    private Date creation_date;
+    private Date creationDate;
 
     @UpdateTimestamp
     @DateTimeFormat(pattern = "dd/mm/yyyy")
-    private Date update_date;
+    private Date updateDate;
 
     private int rating;
 

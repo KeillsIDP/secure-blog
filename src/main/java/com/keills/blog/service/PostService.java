@@ -6,7 +6,7 @@ import com.keills.blog.model.Post;
 import java.util.Optional;
 
 public interface PostService {
-    Optional<Post> getPostById(String id);
-
-    boolean savePost(Post post, Blog blog);
+    Post getPostById(long id);
+    boolean savePost(Post post, long userId);
+    boolean updatePost(Post post);
 }

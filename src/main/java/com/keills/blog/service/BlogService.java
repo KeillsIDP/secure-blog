@@ -7,7 +7,8 @@ import java.util.Optional;
 
 public interface BlogService {
 
-    Optional<Blog> getBlog(User user);
+    Blog getBlogByUser(User user);
+    Blog getBlogById(long id);
     boolean saveBlog(Blog blog);
-    void updateBlog(Blog blog,User user);
+    void updateBlog(Blog blog);
 }

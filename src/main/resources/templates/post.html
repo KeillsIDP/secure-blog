@@ -6,10 +6,18 @@
 </head>
 <body>
     <div th:object="${post}">
-        <h1><span th:utext="*{post_name}"/></h1>
+        <h1><span th:utext="*{postName}"/></h1>
         <h1><span th:utext="*{text}"/></h1>
-        <h1><span th:utext="*{creation_date}"/></h1>
-        <h1><span th:utext="*{update_date}"/></h1>
+        <h1><span th:utext="*{creationDate}"/></h1>
+        <h1><span th:utext="*{updateDate}"/></h1>
     </div>
+    <form action="#" method="get" th:if="${isOwner}" th:action="@{/post/{id}/redact(id = ${post.id})}">
+        <label>Redact</label>
+        <input type = "submit">
+    </form>
+    <form action="#" method="get" th:action="@{/blog/{id}(id = ${blogId})}">
+        <label>To blog</label>
+        <input type = "submit">
+    </form>
 </body>
 </html>

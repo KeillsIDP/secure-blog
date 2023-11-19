@@ -45,7 +45,7 @@ public class User implements UserDetails {
 
     @CreatedDate
     @DateTimeFormat(pattern = "dd/mm/yyyy")
-    private Date registration_date;
+    private Date registrationDate;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

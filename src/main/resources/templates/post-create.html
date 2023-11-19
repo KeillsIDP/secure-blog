@@ -5,11 +5,11 @@
     <title>Title</title>
 </head>
 <body>
-    <form method="post" action="#" role="form" th:object="${post}" th:action="@{/post/create}">
-        <label>Blog Name</label>
-        <input required id="post_name" name="post_name" type="text" th:field="*{post_name}" maxlength=20>
+    <form method="post" action="#" role="form" th:object="${post}" th:action="@{/post/create/{id}(id=${user_id})}">
+        <label>Post Name</label>
+        <input required id="postName" name="postName" type="text" th:field="*{postName}" maxlength=20>
 
-        <label>Blog Info</label>
+        <label>Post Text</label>
         <input required id="text" name="text" type="text" th:field="*{text}" maxlength=1000>
 
         <input type="submit" value="Submit">

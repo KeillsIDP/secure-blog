@@ -6,6 +6,7 @@ import com.keills.blog.model.Role;
 import com.keills.blog.model.User;
 import com.keills.blog.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -51,8 +52,8 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         Blog userBlog = new Blog();
 
         userBlog.setUser(user);
-        userBlog.setBlog_name(username + " blog");
-        userBlog.setBlog_info("Nothing here");
+        userBlog.setBlogName(username + " blog");
+        userBlog.setBlogInfo("Nothing here");
         userBlog.setPosts(new HashSet<Post>());
 
         if(!blogService.saveBlog(userBlog))
@@ -64,12 +65,29 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     }
 
     @Override
-    public Optional<User> getUserByUserId(Long id) {
-        return userRepo.findById(id);
+    public User getUserByUserId(Long id) {
+        Optional<User> response = userRepo.findById(id);
+        if(!response.isPresent())
+            throw new RuntimeException("User not found");
+        return response.get();
     }
 
     @Override
-    public Optional<User> getUserByUserName(String username) {
-        return userRepo.findByUsername(username);
+    public User getUserByUsername(String username) {
+        Optional<User> response = userRepo.findByUsername(username);
+        if(!response.isPresent())
+            throw new RuntimeException("User not found");
+        return response.get();
+    }
+
+    public static boolean isIdMatchesLoggedUser(Long id){
+        User userSecurity = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Long idSecurity = userSecurity.getId();
+
+        return idSecurity == id;
+    }
+
+    public static long getLoggedUserId(){
+        return ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
     }
 }

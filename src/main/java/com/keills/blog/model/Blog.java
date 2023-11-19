@@ -24,16 +24,16 @@ public class Blog {
     @JoinColumn(name="user_table.id")
     private User user;
 
-    private String blog_name;
+    private String blogName;
 
-    private String blog_info;
+    private String blogInfo;
 
     @OneToMany(cascade = CascadeType.ALL)
     private Set<Post> posts;
 
-    private int overall_rating;
+    private int overallRating;
 
     @UpdateTimestamp
     @DateTimeFormat(pattern = "dd/mm/yyyy")
-    private Date update_date;
+    private Date updateDate;
 }

@@ -33,7 +33,7 @@ public class Review {
 
     @CreatedDate
     @DateTimeFormat(pattern = "dd/mm/yyyy")
-    private Date creation_date;
+    private Date creationDate;
 
     private int rating;
 

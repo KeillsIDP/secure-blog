@@ -1,7 +1,8 @@
 package com.keills.blog.controller;
 
 import com.keills.blog.model.User;
-import org.springframework.security.core.context.SecurityContextHolder;
+import com.keills.blog.service.UserServiceImpl;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,8 +21,6 @@ public class MainPageController {
 
     @GetMapping("/toBlog")
     public String toUserBlog(Model model) {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Long id = user.getId();
-        return "redirect:/blog/"+id;
+        return "redirect:/blog/"+ UserServiceImpl.getLoggedUserId();
     }
 }

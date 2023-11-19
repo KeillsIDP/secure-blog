@@ -27,16 +27,22 @@ public class RegistrationController {
 
     @PostMapping("/save")
     public String registrateUser(@Valid @ModelAttribute("user") User user, BindingResult result,Model model){
-        Optional<User> userFromDb = userService.getUserByUserName(user.getUsername());
-        if(userFromDb.isPresent())
-            result.reject("user already exists");
-
-        if(result.hasErrors()){
+        // странный подход, я решил кидать exception сли нет записи при поиске в базе
+        // тут похоже придется отправлять error если все в порядке, и регестрировать, если нет
+        // короче довольно странно, не знаю как сделать лучше
+        try{
+            User userFromDb = userService.getUserByUsername(user.getUsername());
             model.addAttribute("user", user);
             return "/registration";
         }
+        catch (Exception e){
+            if(result.hasErrors()){
+                model.addAttribute("user", user);
+                return "/registration";
+            }
 
-        userService.saveUser(user);
-        return "redirect:/login";
+            userService.saveUser(user);
+            return "redirect:/login";
+        }
     }
 }

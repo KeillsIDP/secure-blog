@@ -18,8 +18,21 @@ public class BlogServiceImpl implements BlogService{
     }
 
     @Override
-    public Optional<Blog> getBlog(User user) {
-        return blogRepo.findByUser(user);
+    public Blog getBlogByUser(User user) {
+        Optional<Blog> response = blogRepo.findByUser(user);
+        if(!response.isPresent())
+            throw new RuntimeException("No blog found");
+
+        return response.get();
+    }
+
+    @Override
+    public Blog getBlogById(long id) {
+        Optional<Blog> response = blogRepo.findById(id);
+        if(!response.isPresent())
+            throw new RuntimeException("No blog found");
+
+        return response.get();
     }
 
     @Override
@@ -33,15 +46,13 @@ public class BlogServiceImpl implements BlogService{
     }
 
     @Override
-    public void updateBlog(Blog blog,User user) {
-        Optional<Blog> response = getBlog(user);
-        if(!response.isPresent())
-            return;
+    public void updateBlog(Blog blog) {
+        Blog blogFromDb = getBlogById(blog.getId());
 
-        Blog oldBlog = response.get();
-        oldBlog.setBlog_info(blog.getBlog_info());
-        oldBlog.setBlog_name(blog.getBlog_name());
-        oldBlog.setPosts(blog.getPosts());
-        blogRepo.save(oldBlog);
+        blogFromDb.setBlogInfo(blog.getBlogInfo());
+        blogFromDb.setBlogName(blog.getBlogName());
+        blogFromDb.setPosts(blog.getPosts());
+
+        blogRepo.save(blogFromDb);
     }
 }

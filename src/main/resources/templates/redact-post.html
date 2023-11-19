@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="post" action="#" role="form" th:object="${post}" th:action="@{/post/{id}/redact(id = ${post.id})}">
+    <label>Post Name</label>
+    <input required id="postName" name="postName" type="text" th:field="*{postName}" maxlength=20>
+
+    <label>Post Text</label>
+    <input required id="text" name="text" type="text" th:field="*{text}" maxlength=1000>
+
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>

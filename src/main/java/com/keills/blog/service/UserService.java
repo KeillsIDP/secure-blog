@@ -6,6 +6,6 @@ import java.util.Optional;
 
 public interface UserService {
     boolean saveUser(User user);
-    Optional<User> getUserByUserId(Long id);
-    Optional<User> getUserByUserName(String username);
+    User getUserByUserId(Long id);
+    User getUserByUsername(String username);
 }
